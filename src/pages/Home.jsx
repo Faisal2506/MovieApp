@@ -54,18 +54,18 @@ const Home = () => {
           </div>
         ))}
       </div>
-      <div className="flex justify-between mt-4">
+      <div className="flex justify-between mt-4 pb-5">
         <button
           onClick={handlePrevPage}
           disabled={currentPage === 1}
-          className="px-4 py-2 text-white bg-blue-500 rounded disabled:opacity-50"
+          className="px-4 py-2 ml-5 text-white bg-blue-500 rounded disabled:opacity-50"
         >
           Previous
         </button>
         <button
           onClick={handleNextPage}
           disabled={currentPage === totalPages}
-          className="px-4 py-2 text-white bg-blue-500 rounded disabled:opacity-50"
+          className="px-4 py-2 mr-5 text-white bg-blue-500 rounded disabled:opacity-50"
         >
           Next
         </button>
