@@ -5,14 +5,14 @@ const SearchResults = () => {
   const { query } = useParams();
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
-  const api_key = "c45a857c193f6302f2b5061c3b85e743";
+  const API_KEY = import.meta.env.VITE_API_KEY;
 
   useEffect(() => {
     const fetchSearchResults = async () => {
       setLoading(true);
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=en-US&query=${query}&page=1`
+          `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1`
         );
         const data = await response.json();
         setResults(data.results);

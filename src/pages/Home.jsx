@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const API_KEY = "c45a857c193f6302f2b5061c3b85e743";
+const API_KEY = import.meta.env.VITE_API_KEY;
 const BASE_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US`;
 
 const Home = () => {
