@@ -45,7 +45,7 @@ const SearchResults = () => {
                   className="w-full h-auto mb-4"
                 />
                 <h2 className="text-xl font-bold text-center text-white">{movie.title}</h2>
-                <p className="text-gray-400 text-center">Rating: {movie.vote_average}</p>
+                <p className="text-white text-center">Rating: {movie.vote_average}</p>
               </Link>
             </div>
           ))}
