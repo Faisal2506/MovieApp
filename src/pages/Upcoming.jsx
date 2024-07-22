@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import SkeletonCard from "../components/SkeletonCard";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 const BASE_URL = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=en-US`;
@@ -9,15 +10,20 @@ const Upcoming = () => {
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
+        setLoading(true);
         const response = await axios.get(`${BASE_URL}&page=${currentPage}`);
         setMovies(response.data.results);
         setTotalPages(response.data.total_pages);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching the upcoming movies:", error);
+        setLoading(false);
       }
     };
 
@@ -40,7 +46,11 @@ const Upcoming = () => {
     <div className="bg-gray-500">
       <h1 className="mb-4 text-3xl font-bold text-center text-white">Upcoming Movies</h1>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {movies.map((movie) => (
+      {loading
+        ? Array.from({ length: 8 }).map((_, index) => (
+              <SkeletonCard key={index} /> 
+            ))
+        : movies.map((movie) => (
           <div key={movie.id} className="p-4 ">
             <Link to={`/movie/${movie.id}`}>
               <img
@@ -50,7 +60,7 @@ const Upcoming = () => {
               />
               <h2 className="text-lg font-semibold text-center text-white">{movie.title}</h2>
             </Link>
-            <p className="text-gray-700 text-center text-white">Rating: {movie.vote_average}</p>
+            <p className=" text-center text-white">Rating: {movie.vote_average}</p>
           </div>
         ))}
       </div>
